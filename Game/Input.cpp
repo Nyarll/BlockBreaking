@@ -89,3 +89,23 @@ Vector2 InputMouse::GetPosition()
 {
 	return this->position;
 }
+
+
+// <Input>
+Input::Input()
+{
+	key = new InputKeyBoard;
+	mouse = new InputMouse;
+}
+
+Input::~Input()
+{
+	delete key;
+	delete mouse;
+}
+
+void Input::Update()
+{
+	key->Update();
+	mouse->Update();
+}

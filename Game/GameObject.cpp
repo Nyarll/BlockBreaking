@@ -110,3 +110,43 @@ void GameObject::SetAliveFlag(bool flag)
 {
 	this->alive = flag;
 }
+
+bool GameObject::CircleCollision(const GameObject obj)
+{
+	float hlength = this->r + obj.r;
+	float xlength = this->position.x - obj.position.x;
+	float ylength = this->position.y - obj.position.y;
+
+	if (hlength * hlength >= xlength * xlength + ylength * ylength)
+	{
+		return TRUE;
+	}
+	else
+	{
+		return FALSE;
+	}
+}
+
+bool GameObject::BoxCollision(const GameObject obj)
+{
+	float ax1 = this->position.x - this->hitsize.x;
+	float ay1 = this->position.y - this->hitsize.y;
+	float ax2 = this->position.x + this->hitsize.x;
+	float ay2 = this->position.y + this->hitsize.y;
+
+	float bx1 = obj.position.x - obj.hitsize.x;
+	float by1 = obj.position.y - obj.hitsize.y;
+	float bx2 = obj.position.x + obj.hitsize.x;
+	float by2 = obj.position.y + obj.hitsize.y;
+
+#if defined(_DEBUG)
+	DrawBox(ax1, ay1, ax2, ay2, COLOR_RED, FALSE);
+	DrawBox(bx1, by1, bx2, by2, COLOR_RED, FALSE);
+#endif
+
+	if ((bx1 < ax2) && (by1 < ay2) && (bx2 > ax1) && (by2 > ay1))
+	{
+		return false;
+	}
+	return false;
+}

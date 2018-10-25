@@ -51,9 +51,11 @@ public:
 	void GameObjectRotate(float rad);
 
 	void MovePos();
-	virtual void Update() = 0;
 	void Render();
 
 	bool GetAliveFlag();
 	void SetAliveFlag(bool flag);
+
+	bool CircleCollision(const GameObject obj);
+	bool BoxCollision(const GameObject obj);
 };

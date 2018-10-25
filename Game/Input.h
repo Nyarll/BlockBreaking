@@ -2,17 +2,7 @@
 #include "Define.h"
 #include "Vector.h"
 
-class Input
-{
-public:
-	Input() {};
-
-	~Input() {};
-
-	virtual void Update() = 0;
-};
-
-class InputKeyBoard extends public Input
+class InputKeyBoard
 {
 private:
 	char key[256] = { 0 };
@@ -22,13 +12,13 @@ public:
 	InputKeyBoard() {};
 	~InputKeyBoard() {};
 
-	void Update() override;
+	void Update();
 	bool GetDown(int key_id);
 	bool GetNow(int key_id);
 	bool GetUp(int key_id);
 };
 
-class InputMouse extends public Input
+class InputMouse
 {
 private:
 	Vector2 position;
@@ -39,10 +29,24 @@ public:
 	InputMouse();
 	~InputMouse() {};
 
-	void Update() override;
+	void Update();
 	bool GetDown(int bottun);
 	bool GetNow(int bottun);
 	bool GetUp(int bottun);
 
 	Vector2 GetPosition();
+};
+
+
+class Input
+{
+public:
+	InputKeyBoard* key;
+	InputMouse* mouse;
+
+public:
+	Input();
+	~Input();
+
+	void Update();
 };

@@ -3,7 +3,7 @@
 #include <string>
 using namespace std;
 
-void Debug::Log(int x, int y, const char* m, unsigned int color)
+void Debug::Log(int x, int y, string m, unsigned int color)
 {
 	DrawFormatString(x, y, color, m);
 }

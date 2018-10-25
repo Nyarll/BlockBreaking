@@ -5,7 +5,7 @@
 class Player extends public GameObject
 {
 private:
-	InputKeyBoard* key;
+	Input* input;
 
 public:
 	Player();
