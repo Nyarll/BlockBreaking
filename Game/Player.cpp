@@ -35,25 +35,25 @@ void Player::Update()
 	{
 		buf.Set(0.0f, -2.0f);
 		vel = vel.Add(&buf);
-		debug.Log(0, 0, "ª‰Ÿ‚³‚ê‚Ä‚¢‚Ü‚·", 0xffffffff);
+		debug.Log(0, 0, "PlayerClass : ª‰Ÿ‚³‚ê‚Ä‚¢‚Ü‚·", 0xffffffff);
 	}
 	if (input->key->GetNow(KEY_INPUT_DOWN))
 	{
 		buf.Set(0.0f, 2.0f);
 		vel = vel.Add(&buf);
-		debug.Log(0, 0, "«‰Ÿ‚³‚ê‚Ä‚¢‚Ü‚·", 0xffffffff);
+		debug.Log(0, 0, "PlayerClass : «‰Ÿ‚³‚ê‚Ä‚¢‚Ü‚·", 0xffffffff);
 	}
 	if (input->key->GetNow(KEY_INPUT_LEFT))
 	{
 		buf.Set(-2.0f, 0.0f);
 		vel = vel.Add(&buf);
-		debug.Log(0, 0, "©‰Ÿ‚³‚ê‚Ä‚¢‚Ü‚·", 0xffffffff);
+		debug.Log(0, 0, "PlayerClass : ©‰Ÿ‚³‚ê‚Ä‚¢‚Ü‚·", 0xffffffff);
 	}
 	if (input->key->GetNow(KEY_INPUT_RIGHT))
 	{
 		buf.Set(2.0f, 0.0f);
 		vel = vel.Add(&buf);
-		debug.Log(0, 0, "¨‰Ÿ‚³‚ê‚Ä‚¢‚Ü‚·", 0xffffffff);
+		debug.Log(0, 0, "PlayerClass : ¨‰Ÿ‚³‚ê‚Ä‚¢‚Ü‚·", 0xffffffff);
 	}
 
 
