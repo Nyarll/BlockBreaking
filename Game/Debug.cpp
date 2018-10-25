@@ -1,7 +1,5 @@
 #include "Debug.h"
-#include <iostream>
-#include <string>
-using namespace std;
+
 
 void Debug::Log(int x, int y, const char* m, unsigned int color)
 {
