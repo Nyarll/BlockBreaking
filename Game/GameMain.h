@@ -12,7 +12,10 @@
 #pragma once
 
 #include "Define.h"
-#include "Player.h"
+//#include "Player.h"
+
+class InputManager;
+class Player;
 
 // クラスの定義 ============================================================
 
@@ -21,9 +24,7 @@ class Game
 {
 	// データメンバの宣言
 private:
-	FrameTimer* frame_timer;
-	Joypad* joy_pad;
-
+	InputManager* input;
 	Player* player;
 
 	// メンバ関数の宣言

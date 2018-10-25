@@ -1,15 +1,14 @@
 #pragma once
 #include "GameObject.h"
-#include "Input.h"
+//#include "Input.h"
+
+class InputManager;
 
 class Player extends public GameObject
 {
-private:
-	Input* input;
-
 public:
-	Player();
+	Player(Vector2 initpos);
 	~Player();
 
-	void Update();
+	void Update(InputManager* input);
 };

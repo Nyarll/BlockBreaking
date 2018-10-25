@@ -91,21 +91,71 @@ Vector2 InputMouse::GetPosition()
 }
 
 
+// <Joypad>
+InputJoypad::InputJoypad(int pad_id)
+{
+	this->id = pad_id;
+	now = 0;
+	old = 0;
+}
+
+InputJoypad::~InputJoypad()
+{
+
+}
+
+void InputJoypad::Update()
+{
+	old = now;
+	now = GetJoypadInputState(this->id);
+}
+
+bool InputJoypad::GetDown(int bottun)
+{
+	if (((now & bottun) == bottun) && ((old & bottun) != bottun))
+	{
+		return true;
+	}
+	return false;
+}
+
+bool InputJoypad::GetNow(int bottun)
+{
+	if ((now & bottun) == bottun)
+	{
+		return true;
+	}
+	return false;
+}
+
+bool InputJoypad::GetUp(int bottun)
+{
+	if (((now & bottun) != bottun) && ((old & bottun) == bottun))
+	{
+		return true;
+	}
+	return false;
+}
+
+
 // <Input>
-Input::Input()
+InputManager::InputManager()
 {
 	key = new InputKeyBoard;
 	mouse = new InputMouse;
+	joypad = new InputJoypad;
 }
 
-Input::~Input()
+InputManager::~InputManager()
 {
 	delete key;
 	delete mouse;
+	delete joypad;
 }
 
-void Input::Update()
+void InputManager::Update()
 {
 	key->Update();
 	mouse->Update();
+	joypad->Update();
 }

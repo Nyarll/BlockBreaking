@@ -1,63 +1,60 @@
 #include "Player.h"
 #include "Debug.h"
 
-Player::Player()
-{
-	input = new Input;
+#include "Input.h"
 
-	Vector2 ipos, isize;
-	int a = 0;
-	ipos.Set((float)SCREEN_CENTER_X, (float)SCREEN_CENTER_Y);
-	isize.Set(100, 100);
+static const float PLAYER_SPEED = 8.0f;
+
+Player::Player(Vector2 initpos)
+{
+	Vector2 isize;
+	static int gh = 0;
+
+	isize.Set(100, 10);
+
+	if (gh == 0)
+	{
+		gh = MakeScreen(INT_CAST isize.x, INT_CAST isize.y);
+		SetDrawScreen(gh);
+		DrawBox(0, 0, 100, 10, COLOR_WHITE, TRUE);
+		SetDrawScreen(DX_SCREEN_BACK);
+	}
+
 	this->SetAliveFlag(true);
-	this->SetSprite(&a, ipos, isize, 1.0f);
-	this->SetPosition(ipos);
+	this->SetSprite(&gh, initpos, isize, 1.0f);
+	this->SetPosition(initpos);
+
 }
 
 
 Player::~Player()
 {
-	delete input;
+
 }
 
 
-void Player::Update()
+void Player::Update(InputManager* input)
 {
-	input->Update();
 	Debug debug;
 
-	Vector2 vel;
-	Vector2 buf;
-	buf.Set(0.0f, 0.0f);
-	vel.Set(0.0f, 0.0f);
+	Vector2 vel = { 0.0f, 0.0f };
+	Vector2 buf = { 0.0f, 0.0f };
 
-	if (input->key->GetNow(KEY_INPUT_UP))
-	{
-		buf.Set(0.0f, -2.0f);
-		vel = vel.Add(&buf);
-		debug.Log(0, 0, "PlayerClass : ª‰Ÿ‚³‚ê‚Ä‚¢‚Ü‚·", 0xffffffff);
-	}
-	if (input->key->GetNow(KEY_INPUT_DOWN))
-	{
-		buf.Set(0.0f, 2.0f);
-		vel = vel.Add(&buf);
-		debug.Log(0, 0, "PlayerClass : «‰Ÿ‚³‚ê‚Ä‚¢‚Ü‚·", 0xffffffff);
-	}
 	if (input->key->GetNow(KEY_INPUT_LEFT))
 	{
-		buf.Set(-2.0f, 0.0f);
+		buf.Set(-PLAYER_SPEED, 0.0f);
 		vel = vel.Add(&buf);
-		debug.Log(0, 0, "PlayerClass : ©‰Ÿ‚³‚ê‚Ä‚¢‚Ü‚·", 0xffffffff);
+		debug.Log(0, SCREEN_BOTTOM - 20, " PlayerClass : ©‰Ÿ‚³‚ê‚Ä‚¢‚Ü‚·", 0xffffffff);
 	}
 	if (input->key->GetNow(KEY_INPUT_RIGHT))
 	{
-		buf.Set(2.0f, 0.0f);
+		buf.Set(PLAYER_SPEED, 0.0f);
 		vel = vel.Add(&buf);
-		debug.Log(0, 0, "PlayerClass : ¨‰Ÿ‚³‚ê‚Ä‚¢‚Ü‚·", 0xffffffff);
+		debug.Log(0, SCREEN_BOTTOM - 20, " PlayerClass : ¨‰Ÿ‚³‚ê‚Ä‚¢‚Ü‚·", 0xffffffff);
 	}
 
-
-
 	this->SetVelocity(vel);
-	this->MovePos();
+	this->MovePos(); 
+	this->Clamp(SCREEN_RIGHT, SCREEN_LEFT, SCREEN_BOTTOM, SCREEN_TOP);
+
 }

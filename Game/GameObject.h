@@ -58,4 +58,6 @@ public:
 
 	bool CircleCollision(const GameObject obj);
 	bool BoxCollision(const GameObject obj);
+
+	void Clamp(int xmax, int xmin, int ymax, int ymin);
 };

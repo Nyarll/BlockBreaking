@@ -70,9 +70,6 @@
     <ClCompile Include="Libraries\GameLibrary\GameLibScreen.cpp">
       <Filter>ライブラリ\ゲームライブラリ</Filter>
     </ClCompile>
-    <ClCompile Include="Libraries\GameLibrary\GameLibInput.cpp">
-      <Filter>ライブラリ\ゲームライブラリ</Filter>
-    </ClCompile>
     <ClCompile Include="Libraries\GameLibrary\GameLibMath.cpp">
       <Filter>ライブラリ\ゲームライブラリ</Filter>
     </ClCompile>
@@ -123,9 +120,6 @@
     </ClInclude>
     <ClInclude Include="Game\Define.h">
       <Filter>ゲーム\Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="Libraries\GameLibrary\GameLibInput.h">
-      <Filter>ライブラリ\ゲームライブラリ</Filter>
     </ClInclude>
     <ClInclude Include="Libraries\GameLibrary\GameLibMath.h">
       <Filter>ライブラリ\ゲームライブラリ</Filter>

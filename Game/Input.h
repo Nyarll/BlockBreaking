@@ -37,16 +37,38 @@ public:
 	Vector2 GetPosition();
 };
 
+class InputJoypad
+{
+private:
+	int id;
+	int now;
+	int old;
 
-class Input
+public:
+	// コンストラクタ
+	InputJoypad(int pad_id = DX_INPUT_KEY_PAD1);
+	// デストラクタ
+	~InputJoypad();
+
+	// 操作
+	void Update();    // 更新
+
+	bool GetDown(int bottun);
+	bool GetNow(int bottun);
+	bool GetUp(int bottun);
+};
+
+
+class InputManager
 {
 public:
 	InputKeyBoard* key;
 	InputMouse* mouse;
+	InputJoypad* joypad;
 
 public:
-	Input();
-	~Input();
+	InputManager();
+	~InputManager();
 
 	void Update();
 };

@@ -60,16 +60,16 @@ void GameObject::SetSprite(int* graph_handle, Vector2 pos, Vector2 size, float s
 
 	if ((*graph_handle == NOT_FOUND_TEXTURE)||(*graph_handle == 0))	// グラフィックハンドルが読み込めていなければ、Nullを表示させる
 	{
-		*graph_handle = MakeScreen(size.x, size.y);
+		*graph_handle = MakeScreen(INT_CAST size.x, INT_CAST size.y);
 		SetDrawScreen(*graph_handle);
 
-		DrawBox(0, 0, size.x, size.y, 0xffff00ff, TRUE);
-		DrawBox(size.x / 2, 0, size.x, size.y / 2, 0xff000000, TRUE);
-		DrawBox(0, size.y / 2, size.x / 2, size.y, 0xff000000, TRUE);
+		DrawBox(0, 0, INT_CAST size.x, INT_CAST size.y, 0xffff00ff, TRUE);
+		DrawBox(INT_CAST size.x / 2, 0, INT_CAST size.x, INT_CAST size.y / 2, 0xff000000, TRUE);
+		DrawBox(0, INT_CAST size.y / 2, INT_CAST size.x / 2, INT_CAST size.y, 0xff000000, TRUE);
 
-		DrawCircle(size.x / 2, size.y / 2, size.x / 2, 0xffff0000, FALSE, 5);
+		DrawCircle(INT_CAST size.x / 2, INT_CAST size.y / 2, INT_CAST size.x / 2, 0xffff0000, FALSE, 5);
 
-		DrawBox(0, 0, size.x, size.y, COLOR_WHITE, FALSE);
+		DrawBox(0, 0, INT_CAST size.x, INT_CAST size.y, COLOR_WHITE, FALSE);
 
 		SetDrawScreen(DX_SCREEN_BACK);
 	}
@@ -82,7 +82,7 @@ void GameObject::SetSprite(int* graph_handle, Vector2 pos, Vector2 size, float s
 	this->hitsize = size;
 	if (hitsize.x == hitsize.y)
 	{
-		this->r = hitsize.x;
+		this->r = hitsize.x / 2;
 	}
 }
 void GameObject::GameObjectRotate(float rad)
@@ -99,7 +99,7 @@ void GameObject::MovePos()
 
 void GameObject::Render()
 {
-	DrawRotaGraph(sprite.pos.x, sprite.pos.y, sprite.scale, sprite.rota, sprite.texture, TRUE);
+	DrawRotaGraph(INT_CAST sprite.pos.x, INT_CAST sprite.pos.y, sprite.scale, sprite.rota, sprite.texture, TRUE);
 }
 
 bool GameObject::GetAliveFlag()
@@ -129,19 +129,19 @@ bool GameObject::CircleCollision(const GameObject obj)
 
 bool GameObject::BoxCollision(const GameObject obj)
 {
-	float ax1 = this->position.x - this->hitsize.x;
-	float ay1 = this->position.y - this->hitsize.y;
-	float ax2 = this->position.x + this->hitsize.x;
-	float ay2 = this->position.y + this->hitsize.y;
+	float ax1 = this->position.x - this->hitsize.x / 2;
+	float ay1 = this->position.y - this->hitsize.y / 2;
+	float ax2 = this->position.x + this->hitsize.x / 2;
+	float ay2 = this->position.y + this->hitsize.y / 2;
 
-	float bx1 = obj.position.x - obj.hitsize.x;
-	float by1 = obj.position.y - obj.hitsize.y;
-	float bx2 = obj.position.x + obj.hitsize.x;
-	float by2 = obj.position.y + obj.hitsize.y;
+	float bx1 = obj.position.x - obj.hitsize.x / 2;
+	float by1 = obj.position.y - obj.hitsize.y / 2;
+	float bx2 = obj.position.x + obj.hitsize.x / 2;
+	float by2 = obj.position.y + obj.hitsize.y / 2;
 
 #if defined(_DEBUG)
-	DrawBox(ax1, ay1, ax2, ay2, COLOR_RED, FALSE);
-	DrawBox(bx1, by1, bx2, by2, COLOR_RED, FALSE);
+	DrawBox(INT_CAST ax1, INT_CAST ay1, INT_CAST ax2, INT_CAST ay2, COLOR_RED, FALSE);
+	DrawBox(INT_CAST bx1, INT_CAST by1, INT_CAST bx2, INT_CAST by2, COLOR_RED, FALSE);
 #endif
 
 	if ((bx1 < ax2) && (by1 < ay2) && (bx2 > ax1) && (by2 > ay1))
@@ -149,4 +149,30 @@ bool GameObject::BoxCollision(const GameObject obj)
 		return false;
 	}
 	return false;
+}
+
+void GameObject::Clamp(int xmax, int xmin, int ymax, int ymin)
+{
+	float px1 = this->position.x - this->hitsize.x / 2;
+	float py1 = this->position.y - this->hitsize.y / 2;
+	float px2 = this->position.x + this->hitsize.x / 2;
+	float py2 = this->position.y + this->hitsize.y / 2;
+
+	if (px1 < xmin)
+	{
+		this->position.x = this->hitsize.x / 2;
+	}
+	if (py1 < ymin)
+	{
+		this->position.y = this->hitsize.y / 2;
+	}
+
+	if (px2 > xmax)
+	{
+		this->position.x = xmax - this->hitsize.x / 2;
+	}
+	if (py2 > ymax)
+	{
+		this->position.y = ymax - this->hitsize.y / 2;
+	}
 }

@@ -10,7 +10,8 @@
 
 // ヘッダファイルの読み込み ================================================
 #include "GameMain.h"
-
+#include "Player.h"
+#include "Input.h"
 
 
 
@@ -24,9 +25,8 @@
 //------------------------------------------------------------------
 Game::Game()
 {
-	this->frame_timer = new FrameTimer;
-	this->joy_pad = new Joypad;
-	this->player = new Player;
+	input = new InputManager;
+	this->player = new Player({ FLOAT_CAST SCREEN_CENTER_X,FLOAT_CAST(SCREEN_CENTER_Y + SCREEN_CENTER_Y / 2) });
 }
 
 
@@ -35,8 +35,7 @@ Game::Game()
 //------------------------------------------------------------------
 Game::~Game()
 {
-	delete this->frame_timer;
-	delete this->joy_pad;
+	delete input;
 	delete this->player;
 }
 
@@ -65,8 +64,8 @@ void Game::Initialize(void)
 //----------------------------------------------------------------------
 void Game::Update(void)
 {
-	frame_timer->Update();
-	player->Update();
+	input->Update();
+	player->Update(input);
 }
 
 
@@ -80,7 +79,6 @@ void Game::Update(void)
 //----------------------------------------------------------------------
 void Game::Render(void)
 {
-	DrawFormatString(60, 60, 0xffffffff, "FRAME RATE : %f", frame_timer->GetFrameRate());
 	player->Render();
 }
 

@@ -4,10 +4,13 @@
 #include <math.h>
 
 // <システム> ----------------------------------------------------------
-const char* const GAME_TITLE = "Sample Game";    // ゲームタイトル
+const char* const GAME_TITLE = "Block Breaking";    // ゲームタイトル
 
 #define EXTENDS :
 #define extends :
+
+#define INT_CAST	(int)
+#define FLOAT_CAST	(float)
 
 // <画面> --------------------------------------------------------------
 const int SCREEN_WIDTH = 640;    // 画面の幅[pixel]
