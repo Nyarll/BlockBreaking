@@ -39,6 +39,18 @@
     <Filter Include="ゲーム\Utility">
       <UniqueIdentifier>{ff8c9246-9b2a-4950-ab73-ed258e544f8f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ゲーム\Player">
+      <UniqueIdentifier>{46c26da0-934d-4ef1-9e26-dc2c3296bae0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ゲーム\Debug">
+      <UniqueIdentifier>{d074bd7c-ea17-400c-8aed-3777f16d55f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ゲーム\Block">
+      <UniqueIdentifier>{aa128c5f-24fa-4a8f-88d9-8d4b227c6153}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ゲーム\Ball">
+      <UniqueIdentifier>{48b8b6b1-f4a6-43ac-85a7-4048b8f6e750}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <!-- ソースファイル -->
   <ItemGroup>
@@ -73,14 +85,20 @@
     <ClCompile Include="Libraries\GameLibrary\GameLibMath.cpp">
       <Filter>ライブラリ\ゲームライブラリ</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Player.cpp">
-      <Filter>ゲーム</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Debug.cpp">
-      <Filter>ゲーム</Filter>
-    </ClCompile>
     <ClCompile Include="Game\Input.cpp">
       <Filter>ゲーム\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Player.cpp">
+      <Filter>ゲーム\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Debug.cpp">
+      <Filter>ゲーム\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Block.cpp">
+      <Filter>ゲーム\Block</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Ball.cpp">
+      <Filter>ゲーム\Ball</Filter>
     </ClCompile>
   </ItemGroup>
   <!-- ヘッダファイル -->
@@ -124,14 +142,20 @@
     <ClInclude Include="Libraries\GameLibrary\GameLibMath.h">
       <Filter>ライブラリ\ゲームライブラリ</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Player.h">
-      <Filter>ゲーム</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Debug.h">
-      <Filter>ゲーム</Filter>
-    </ClInclude>
     <ClInclude Include="Game\Input.h">
       <Filter>ゲーム\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Player.h">
+      <Filter>ゲーム\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Debug.h">
+      <Filter>ゲーム\Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Block.h">
+      <Filter>ゲーム\Block</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Ball.h">
+      <Filter>ゲーム\Ball</Filter>
     </ClInclude>
   </ItemGroup>
   <!-- リソースファイル -->

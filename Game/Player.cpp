@@ -40,6 +40,9 @@ void Player::Update(InputManager* input)
 	Vector2 vel = { 0.0f, 0.0f };
 	Vector2 buf = { 0.0f, 0.0f };
 
+	/*Vector2 mpos = input->mouse->GetPosition();
+	this->SetPosition(mpos);*/
+
 	if (input->key->GetNow(KEY_INPUT_LEFT))
 	{
 		buf.Set(-PLAYER_SPEED, 0.0f);
@@ -57,4 +60,29 @@ void Player::Update(InputManager* input)
 	this->MovePos(); 
 	this->Clamp(SCREEN_RIGHT, SCREEN_LEFT, SCREEN_BOTTOM, SCREEN_TOP);
 
+}
+
+void Player::AutoPlay(GameObject* ball)
+{
+	float pleft, pright;
+	float bleft, bright;
+	pleft = this->GetPosition().x - this->GetHitSizeV().x / 2;
+	pright = this->GetPosition().x + this->GetHitSizeV().x / 2;
+
+	bleft = ball->GetPosition().x - ball->GetHitSizeV().x / 2;
+	bright = ball->GetPosition().x + ball->GetHitSizeV().x / 2;
+
+
+	Vector2 vel = { 0,0 };
+	if (pleft > bleft)
+	{
+		vel.x = -PLAYER_SPEED;
+	}
+	else if (pright < bright)
+	{
+		vel.x = PLAYER_SPEED;
+	}
+
+	this->SetVelocity(vel);
+	this->MovePos();
 }

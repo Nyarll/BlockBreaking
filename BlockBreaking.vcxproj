@@ -88,6 +88,8 @@
   </ItemDefinitionGroup>
   <!-- ソースファイル -->
   <ItemGroup>
+    <ClCompile Include="Game\Ball.cpp" />
+    <ClCompile Include="Game\Block.cpp" />
     <ClCompile Include="Game\Debug.cpp" />
     <ClCompile Include="Game\GameObject.cpp" />
     <ClCompile Include="Game\Input.cpp" />
@@ -105,6 +107,8 @@
   </ItemGroup>
   <!-- ヘッダファイル -->
   <ItemGroup>
+    <ClInclude Include="Game\Ball.h" />
+    <ClInclude Include="Game\Block.h" />
     <ClInclude Include="Game\Debug.h" />
     <ClInclude Include="Game\Define.h" />
     <ClInclude Include="Game\GameObject.h" />

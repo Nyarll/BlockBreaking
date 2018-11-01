@@ -32,7 +32,7 @@ GameObject::GameObject()
 
 GameObject::~GameObject()
 {
-	
+
 }
 
 void GameObject::SetPosition(Vector2 pos)
@@ -50,15 +50,29 @@ void GameObject::SetVelocity(Vector2 vel)
 	this->velocity = vel;
 }
 
+Vector2 GameObject::GetVelocity()
+{
+	return this->velocity;
+}
+
 void GameObject::SetSpeed(Vector2 spd)
 {
 	this->speed = spd;
 }
 
+Vector2 GameObject::GetHitSizeV()
+{
+	return this->hitsize;
+}
+float GameObject::GetHitSizeF()
+{
+	return this->r;
+}
+
 void GameObject::SetSprite(int* graph_handle, Vector2 pos, Vector2 size, float scale)
 {
 
-	if ((*graph_handle == NOT_FOUND_TEXTURE)||(*graph_handle == 0))	// グラフィックハンドルが読み込めていなければ、Nullを表示させる
+	if ((*graph_handle == NOT_FOUND_TEXTURE) || (*graph_handle == 0))	// グラフィックハンドルが読み込めていなければ、Nullを表示させる
 	{
 		*graph_handle = MakeScreen(INT_CAST size.x, INT_CAST size.y);
 		SetDrawScreen(*graph_handle);
@@ -111,33 +125,31 @@ void GameObject::SetAliveFlag(bool flag)
 	this->alive = flag;
 }
 
-bool GameObject::CircleCollision(const GameObject obj)
+bool GameObject::CircleCollision(const GameObject* obj)
 {
-	float hlength = this->r + obj.r;
-	float xlength = this->position.x - obj.position.x;
-	float ylength = this->position.y - obj.position.y;
+	float hlength = this->r + obj->r;
+	float xlength = this->position.x - obj->position.x;
+	float ylength = this->position.y - obj->position.y;
 
 	if (hlength * hlength >= xlength * xlength + ylength * ylength)
 	{
-		return TRUE;
+		return true;
 	}
-	else
-	{
-		return FALSE;
-	}
+	return false;
+
 }
 
-bool GameObject::BoxCollision(const GameObject obj)
+bool GameObject::BoxCollision(const GameObject* obj)
 {
 	float ax1 = this->position.x - this->hitsize.x / 2;
 	float ay1 = this->position.y - this->hitsize.y / 2;
 	float ax2 = this->position.x + this->hitsize.x / 2;
 	float ay2 = this->position.y + this->hitsize.y / 2;
 
-	float bx1 = obj.position.x - obj.hitsize.x / 2;
-	float by1 = obj.position.y - obj.hitsize.y / 2;
-	float bx2 = obj.position.x + obj.hitsize.x / 2;
-	float by2 = obj.position.y + obj.hitsize.y / 2;
+	float bx1 = obj->position.x - obj->hitsize.x / 2;
+	float by1 = obj->position.y - obj->hitsize.y / 2;
+	float bx2 = obj->position.x + obj->hitsize.x / 2;
+	float by2 = obj->position.y + obj->hitsize.y / 2;
 
 #if defined(_DEBUG)
 	DrawBox(INT_CAST ax1, INT_CAST ay1, INT_CAST ax2, INT_CAST ay2, COLOR_RED, FALSE);
@@ -146,7 +158,7 @@ bool GameObject::BoxCollision(const GameObject obj)
 
 	if ((bx1 < ax2) && (by1 < ay2) && (bx2 > ax1) && (by2 > ay1))
 	{
-		return false;
+		return true;
 	}
 	return false;
 }

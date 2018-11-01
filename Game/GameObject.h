@@ -46,7 +46,12 @@ public:
 	void SetPosition(Vector2 pos);
 	Vector2 GetPosition();
 	void SetVelocity(Vector2 vel);
+	Vector2 GetVelocity();
 	void SetSpeed(Vector2 spd);
+
+	Vector2 GetHitSizeV();
+	float GetHitSizeF();
+
 	void SetSprite(int* graph_handle, Vector2 pos, Vector2 size, float scale = 1.0f);
 	void GameObjectRotate(float rad);
 
@@ -56,8 +61,8 @@ public:
 	bool GetAliveFlag();
 	void SetAliveFlag(bool flag);
 
-	bool CircleCollision(const GameObject obj);
-	bool BoxCollision(const GameObject obj);
+	bool CircleCollision(const GameObject* obj);
+	bool BoxCollision(const GameObject* obj);
 
 	void Clamp(int xmax, int xmin, int ymax, int ymin);
 };

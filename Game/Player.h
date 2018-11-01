@@ -11,4 +11,5 @@ public:
 	~Player();
 
 	void Update(InputManager* input);
+	void AutoPlay(GameObject* ball);
 };

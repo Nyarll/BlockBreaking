@@ -4,71 +4,69 @@
 
 void Vector2::Set(float x_, float y_)
 {
-	x = x_;
-	y = y_;
+	this->x = x_;
+	this->y = y_;
 }
 
 Vector2 Vector2::Add(Vector2* vec2)
 {
-	return{ x + vec2->x, y + vec2->y };
+	return{ this->x + vec2->x, this->y + vec2->y };
 }
 
 Vector2 Vector2::Sub(Vector2* vec2)
 {
-	return{ x - vec2->x, y - vec2->y };
+	return{ this->x - vec2->x, this->y - vec2->y };
 }
 
 Vector2 Vector2::Mul(float mul)
 {
-	return{ x * mul, y * mul };
+	return{ this->x * mul, this->y * mul };
 }
 
 Vector2 Vector2::Div(float div)
 {
-	return{ x / div, y / div };
+	return{ this->x / div, this->y / div };
 }
 
 Vector2 Vector2::Nomalize()
 {
-	float len = Vector2::Length();
-	return{ x / len,y / len };
+	float len = this->Length();
+	return{ this->x / len,this->y / len };
 }
 
 float Vector2::Dot(Vector2* vec2)
 {
-	return ((x * vec2->x) + (y * vec2->y));
+	return ((this->x * vec2->x) + (this->y * vec2->y));
 }
 
 float Vector2::Cross(Vector2* vec2)
 {
-	return (x * vec2->y - vec2->x * y);
+	return (this->x * vec2->y - vec2->x * this->y);
 }
 
 Vector2 Vector2::Rotate(float rad)
 {
-	float sc = Length();
-	float angle = Angle();
-	return{ cosf(angle + rad) * sc, sinf(angle + rad) * sc };
+	return{ ((this->x * cosf(rad)) - (this->y * sinf(rad))),((this->x * sinf(rad)) + (this->y * cosf(rad))) };
 }
 
 float Vector2::Angle()
 {
-	return atan2f(y, x);
+	return atan2f(this->y, this->x);
 }
 
 float Vector2::Angle2(Vector2* vec2)
 {
-	return atan2(vec2->y - y, vec2->x - x);
+	return atan2(vec2->y - this->y, vec2->x - this->x);
 }
 
 float Vector2::Length()
 {
-	return sqrtf(x * x + y * y);
+	return sqrtf(this->x * this->x + this->y * this->y);
 }
 
 float Vector2::LengthSquared()
 {
-	return (x * x) + (y * y);
+	return (this->x * this->x) + (this->y * this->y);
 }
 
 float Vector2::LengthTo(Vector2* vec2)
@@ -78,7 +76,7 @@ float Vector2::LengthTo(Vector2* vec2)
 
 float Vector2::LengthSquaredTo(Vector2* vec2)
 {
-	return (vec2->x - x) * (vec2->x - x) + (vec2->y - y) * (vec2->y - y);
+	return (vec2->x - this->x) * (vec2->x - this->x) + (vec2->y - this->y) * (vec2->y - this->y);
 }
 
 void Vector2::Decompose(Vector2* vec2, Vector2* outvec1, Vector2* outvec2)
@@ -98,7 +96,7 @@ void Vector2::Decompose(Vector2* vec2, Vector2* outvec1, Vector2* outvec2)
 }
 bool Vector2::CrossPoint(Vector2* vec1_gool, Vector2* vec2_start, Vector2* vec2_gool, Vector2* output)
 {
-	Vector2 p1 = { x,y };
+	Vector2 p1 = { this->x,this->y };
 	Vector2 p2 = *vec1_gool;
 	Vector2 p3 = *vec2_start;
 	Vector2 p4 = *vec2_gool;

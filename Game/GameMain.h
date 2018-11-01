@@ -16,6 +16,15 @@
 
 class InputManager;
 class Player;
+class Ball;
+class Block;
+
+// ブロックサイズ w = 640 / 8, h = w / 4,
+const int BLOCK_NUM_X = 8;
+const int BLOCK_NUM_Y = 6;
+const int BLOCK_NUM = (BLOCK_NUM_X * BLOCK_NUM_Y);
+
+const UINT color_list[3] = { 0xffff0000,0xff00ff00,0xff0000ff };
 
 // クラスの定義 ============================================================
 
@@ -26,6 +35,8 @@ class Game
 private:
 	InputManager* input;
 	Player* player;
+	Ball* ball;
+	Block* block[BLOCK_NUM];
 
 	// メンバ関数の宣言
 public:
